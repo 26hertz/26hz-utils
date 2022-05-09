@@ -11,5 +11,5 @@ read uses
 
 export USE_PATH="/etc/portage/package.use"
 
-doas mkdir -p ${USE_PATH}/${category}
-echo "${category}/${package} ${uses}" | doas tee -a "${USE_PATH}/${category}/${package}"
+mkdir -p ${USE_PATH}/${category}
+echo "${category}/${package} ${uses}" | tee -a "${USE_PATH}/${category}/${package}"
