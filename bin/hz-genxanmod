@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+die() {
+	echo $*
+	exit 1
+}
+
+export PV=`eselect kernel list | grep '\*' | awk -F\- '{print$2}'`
+
+cd /usr/src/linux
+[ ! -f /usr/src/linux/.config ] && \
+	doas make oldconfig
+
+doas make -j32 || die
+doas make install
+doas rm -rf /boot/xanmod && doas cp /boot/vmlinuz-${PV}-xanmod1 /boot/xanmod
